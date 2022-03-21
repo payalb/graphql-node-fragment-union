@@ -10,8 +10,13 @@ const typeDefs = gql`
    fragment data on Post{
       title: String
    }
-   type User{
+
+   interface Person {
       id: ID
+      name: String
+   }
+   type User implements Person{
+       id: ID
       name: String
       posts: [Post]
    }
@@ -27,7 +32,7 @@ const typeDefs = gql`
 
    type Query{
       user(userid : ID ): UserResult
-      users: [User]
+      users: [Person]
       posts: [Post]
       post(id : ID!): Post
    }
